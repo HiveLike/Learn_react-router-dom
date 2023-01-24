@@ -1,15 +1,47 @@
+// Income - доходы
+// Expense - расходы
 
+import { useState } from "react";
+import { TYPES } from "../types/operation";
+import Item from "../components/Item/Item";
+import formatMoney from "../utils/formatMoney";
+
+const initialItemsState = [
+    {
+        category: 'Продукты',
+        total: 2000,
+        type: TYPES.EXPENSE,
+        id: 1,
+        created_at: new Date('2022-01-01'),
+    },
+    {
+        category: 'Зарплата',
+        total: 50000,
+        type: TYPES.INCOME,
+        id: 2,
+        created_at: new Date('2023-01-01'),
+    },
+    {
+        category: 'Автомобиль',
+        total: 16000,
+        type: TYPES.EXPENSE,
+        id: 1,
+        created_at: new Date('2022-03-12'),
+    },
+];
 
 const HomePage = () => {
+    const [items, setItems] = useState(initialItemsState);
+
     return (
         <section>
             <div className="container">
                 <div className="layout">
                     <header>
-                        <h1>Общий баланс: 30 000 руб.</h1>
+                        <h1>Общий баланс: {formatMoney(70000)}</h1>
                     </header>
 
-                    <div calssName="form">
+                    <div className="form">
                     <h2>Добавить операцию</h2>
                     <form>
                         <input type="text" name="total" placeholder="30 000 руб" />
@@ -32,53 +64,32 @@ const HomePage = () => {
                         </div>
 
                         <div className="items">
-                            <div className="item">
-                            <div className="item_left">
-                                <div className="circle expense">
-                                    {/* Expence */}
-                                    <i class="fa-solid fa-basket-shopping"></i>
-                                </div>
 
-                                <p className="category">
-                                    Категория: продукты
-                                </p>
-                            </div>
-                            <div className="item_right">
-                                <p className="total">
-                                    2 500 руб.
-                                </p>
+                            {
+                                items.map((item) => <Item key={item.id} item={item}/>)
+                            }
 
-                                <button className="item__button">
-                                    Remove
-                                </button>
-                            </div>
-                            </div>
-                            <div className="item">
-                            <div className="item_left">
-                                <div className="circle income">
-                                    {/* income */}
-                                    <i class="fa-solid fa-credit-card"></i>
-                                </div>
-
-                                <p className="category">
-                                    Категория: зароботная плата
-                                </p>
-                            </div>
-                            <div className="item_right">
-                                <p className="total">
-                                    2 500 руб.
-                                </p>
-
-                                <button className="item__button">
-                                    Remove
-                                </button>
-                            </div>
-                            </div>
                         </div>
 
                         <div className="pagination">
                             <button className="pagination__button">
                                 <span>1</span>
+                            </button>
+
+                            <button className="pagination__button">
+                                <span>2</span>
+                            </button>
+
+                            <button className="pagination__button">
+                                <span>3</span>
+                            </button>
+
+                            <button className="pagination__button">
+                                <span>4</span>
+                            </button>
+
+                            <button className="pagination__button">
+                                <span>5</span>
                             </button>
                         </div>
                     </div>
